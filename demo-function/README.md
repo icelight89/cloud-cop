@@ -1,5 +1,6 @@
-## Required Environment variables
+# Required Environment variables
 
-### PGCONNECTIONSTRING
+## PGCONNECTIONSTRING
+
 Should be of the form `postgresql://dbuser:secretpassword@database.server.com:{PORT}/{default_db}`
 
