@@ -19,7 +19,7 @@ export class AppService {
       console.error(error);
     }
     return {
-      function_health: 'healthy',
+      service_health: 'healthy',
       db_health: dbConnectionStatus,
     };
   }
