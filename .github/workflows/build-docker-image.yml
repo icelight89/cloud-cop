@@ -9,7 +9,7 @@ env:
   ACR_USERNAME: e0a0b9a6-7559-48a1-b1cc-e7567b84f02e
   ACR_PASSWORD: ${{secrets.ACR_PASSWORD}}
   IMAGE_NAME: demomicroservice
-  AZURE_WEBAPP_NAME: 'jop1rlz-demo'
+  AZURE_WEBAPP_NAME: jop1rlz-demo
 
 jobs:
   build-and-push-image:
@@ -45,11 +45,13 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
       - name: Deploy web app container
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{env.AZURE_WEBAPP_NAME}}
+          app-name: 'jop1rlz-demo'
           images: ${{env.ACR_LOGIN_SERVER}}/${{env.IMAGE_NAME}}:${{ github.sha }}
+          
       - name: Azure logout
         run: |
           az logout
