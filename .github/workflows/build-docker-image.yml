@@ -5,6 +5,7 @@ on:
 
 env:
   ACR_LOGIN_SERVER: jop1rlzcopdemo.azurecr.io
+  ACR_NAME: jop1rlzcopdemo
   ACR_USERNAME: e0a0b9a6-7559-48a1-b1cc-e7567b84f02e
   ACR_PASSWORD: ${{secrets.ACR_PASSWORD}}
   IMAGE_NAME: demomicroservice
@@ -21,11 +22,8 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Log in to the Container registry
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ env.ACR_LOGIN_SERVER }}
-          username: ${{env.ACR_USERNAME}}
-          password: ${{secrets.ACR_PASSWORD}}
+        run: | 
+          az acr login -n ${{env.ACR_NAME}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
