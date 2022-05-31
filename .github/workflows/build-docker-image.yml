@@ -12,29 +12,29 @@ env:
   AZURE_WEBAPP_NAME: jop1rlz-demo
 
 jobs:
-  build-and-push-image:
-    runs-on: ubuntu-latest
+#   build-and-push-image:
+#     runs-on: ubuntu-latest
     
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: "Login via Azure CLI"
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Log in to the Container registry
-        run: | 
-          az acr login -n ${{env.ACR_NAME}}
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+#       - name: "Login via Azure CLI"
+#         uses: azure/login@v1
+#         with:
+#           creds: ${{ secrets.AZURE_CREDENTIALS }}
+#       - name: Log in to the Container registry
+#         run: | 
+#           az acr login -n ${{env.ACR_NAME}}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: ./demo-microservice
-          push: true
-          tags: ${{env.ACR_LOGIN_SERVER}}/${{env.IMAGE_NAME}}:${{ github.sha }}
-      - name: Azure logout
-        run: |
-          az logout
+#       - name: Build and push Docker image
+#         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+#         with:
+#           context: ./demo-microservice
+#           push: true
+#           tags: ${{env.ACR_LOGIN_SERVER}}/${{env.IMAGE_NAME}}:${{ github.sha }}
+#       - name: Azure logout
+#         run: |
+#           az logout
           
   deploy-image-to-azure:
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'jop1rlz-demo'
-          images: ${{env.ACR_LOGIN_SERVER}}/${{env.IMAGE_NAME}}:${{ github.sha }}
+          images: ${{env.ACR_LOGIN_SERVER}}/${{env.IMAGE_NAME}}:latest
           
       - name: Azure logout
         run: |
