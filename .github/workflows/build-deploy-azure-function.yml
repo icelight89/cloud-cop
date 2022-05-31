@@ -5,7 +5,7 @@ on:
     
 
 env:
-  AZURE_FUNCTIONAPP_NAME: 'jop1rlz-demo-function'
+  AZURE_FUNCTIONAPP_NAME: 'jop1rlz-function-app'
   AZURE_FUNCTIONAPP_PACKAGE_PATH: './demo-function'      
   NODE_VERSION: '14.x'                     
 
